@@ -3,7 +3,13 @@ const express = require('express')
 const app = express()
 const db = require('./models/index')
 
+const userController = require('./controllers/userController')
+
+app.use(require('./middleware/headers'))
 app.use(express.json())
+
+app.use('/user', userController)
+
 db.sequelize.sync()
 
 app.listen(5022, () => {
